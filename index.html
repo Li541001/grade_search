@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/logo.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css">
+    <title>成績查詢</title>
+</head>
+<body>
+    <div class="container">
+        <div class="label">輸入名字</div>
+        <div class="box">
+            <input class="input-block" id="text_field" type="text" onchange="handleChange()" required>
+            <span class="hint">NAME</span>
+        </div>  
+        <div class="button-box">
+            <input type="button" class="button" onclick="handleClick()">
+            <img src="assets/search.gif" height="40px" class="search">
+        </div>
+    </div>
+    <div class="result-container">
+        <div class="label">成績</div>
+        <div class="ul-box">
+            <div class="item">老師姓名：</div>
+            <div class="item-result" id="result1">無</div>
+            <div class="item">學生態度：</div>
+            <div class="item-result" id="result2">無</div>
+            <div class="item">上課情況：</div>
+            <div class="item-result" id="result3">無</div>
+            <div class="item">題意理解：</div>
+            <div class="item-result" id="result4">無</div>
+            <div class="item">計算情形：</div>
+            <div class="item-result" id="result5">無</div>
+            <div class="item">作業作答：</div>
+            <div class="item-result" id="result6">無</div>
+            <div class="item">優缺點：</div>
+            <div class="item-result" id="result7">無</div>
+            <div class="item">後續規劃：</div>
+            <div class="item-result" id="result8">無</div>
+        </div>
+    </div>
+</body>
+<script>
+    const GET_API_KEY = 'https://api.jsonstorage.net/v1/json/e45c0f75-394a-48f8-8ba0-3bce68621f81/14d47bee-cc6b-42c9-a1e6-0cf927729823'
+    
+    let searchName
+    let content
+    const result1 = document.getElementById('result1')
+    const result2 = document.getElementById('result2')
+    const result3 = document.getElementById('result3')
+    const result4 = document.getElementById('result4')
+    const result5 = document.getElementById('result5')
+    const result6 = document.getElementById('result6')
+    const result7 = document.getElementById('result7')
+    const result8 = document.getElementById('result8')
+    const text_field = document.getElementById('text_field')
+    const handleChange = () =>{
+        searchName = text_field.value
+        // console.log(searchName)
+    }
+    const handleClick = () =>{
+        fetch(GET_API_KEY)
+        .then((res)=>{
+            return res.text()
+        })
+        .then((content)=>{
+            content = JSON.parse(content)
+            // console.log(content[`${searchName}`])
+            if(content[`${searchName}`] == undefined){
+                result1.innerHTML = '無資料'
+                result2.innerHTML = '無資料'
+                result3.innerHTML = '無資料'
+                result4.innerHTML = '無資料'
+                result5.innerHTML = '無資料'
+                result6.innerHTML = '無資料'
+                result7.innerHTML = '無資料'
+                result8.innerHTML = '無資料'
+            }else{
+                result1.innerHTML = content[`${searchName}`]['teacherName']
+                result2.innerHTML = content[`${searchName}`]['studentName']
+                result3.innerHTML = content[`${searchName}`]['attitude']
+                result4.innerHTML = content[`${searchName}`]['state']
+                result5.innerHTML = content[`${searchName}`]['understand']
+                result6.innerHTML = content[`${searchName}`]['answer']
+                result7.innerHTML = content[`${searchName}`]['pro_con']
+                result8.innerHTML = content[`${searchName}`]['plan']
+            }
+        })
+    }
+        // {"火火1":{
+        //     "teacherName":"火火",
+        //     "studentName":"火火1",
+        //     "attitude":"配合度高",
+        //     "state":"易分心",
+        //     "understand":"多看課外讀物",
+        //     "answer":"尚可",
+        //     "pro_con":"經常遲交",
+        //     "plan":"火火3"
+        // },
+        // "水水1":{
+        //     "teacherName":"水水",
+        //     "studentName":"水水1",
+        //     "attitude":"積極",
+        //     "state":"認真",
+        //     "understand":"優秀",
+        //     "answer":"良好",
+        //     "pro_con":"良好",
+        //     "plan":"水水3"
+        // }}
+
+</script>
+</html>
