@@ -2,6 +2,8 @@
     border: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Montserrat","IBM Plex Sans JP", serif;
+    font-weight: bolder;
 }
 body{
     width: 100vw;
@@ -11,6 +13,10 @@ body{
     justify-content: center;
     align-items: center;
     background-color: #f2f2f2;
+}
+.title{
+    font-size: 28px;
+    margin-bottom: 30px;
 }
 .container{
     position: relative;
@@ -68,11 +74,15 @@ body{
 .button{
     height: 40px;
     width: 40px;
-    border-radius: 5px;
+    border-radius: 50%;
     background-color: #ffffff;
-    transition: 0.5s;
+    transition: 2.5s;
     color: #333;
     cursor: pointer;
+}
+.button:hover{
+    background-color: #FFCB74;
+    border-radius: 3px;
 }
 .search{
     position: absolute;
@@ -102,7 +112,7 @@ body{
 .result-container{
     position: relative;
     margin: 50px;
-    height: 65%;
+    height: 55%;
     width: 75%;
     border-radius: 5px;
     display: flex;
@@ -115,6 +125,7 @@ body{
 }
 
 .ul-box{
+    color: #3e3e3e;
     display: grid;
     grid-auto-flow: row;
     justify-content: start;
