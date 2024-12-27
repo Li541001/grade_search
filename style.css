@@ -4,7 +4,7 @@
     box-sizing: border-box;
     font-family: "Montserrat","IBM Plex Sans JP", serif;
     font-weight: bolder;
-    overflow: hidden;
+    background-repeat: no-repeat;
 }
 body{
     width: 100vw;
